@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopProjectAPP", "ShopProjectAPP\ShopProjectAPP.csproj", "{ADCEB62C-BFB2-43FB-88EE-B6DC256B0C15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopProjectAPI", "ShopProjectAPI\ShopProjectAPI.csproj", "{EEC157B5-954F-4755-A14B-528B2211E500}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADCEB62C-BFB2-43FB-88EE-B6DC256B0C15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCEB62C-BFB2-43FB-88EE-B6DC256B0C15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCEB62C-BFB2-43FB-88EE-B6DC256B0C15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCEB62C-BFB2-43FB-88EE-B6DC256B0C15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC157B5-954F-4755-A14B-528B2211E500}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC157B5-954F-4755-A14B-528B2211E500}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC157B5-954F-4755-A14B-528B2211E500}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC157B5-954F-4755-A14B-528B2211E500}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7195C4A-5842-48E3-8552-39A693AA47CD}
+	EndGlobalSection
+EndGlobal
