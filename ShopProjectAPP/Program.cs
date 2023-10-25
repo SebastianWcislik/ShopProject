@@ -1,4 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ShopProjectAPP.Data;
 using ShopProjectAPP.Interfaces;
+using ShopProjectAPP.Models;
 using ShopProjectAPP.Repository;
 
 namespace ShopProjectAPP
@@ -11,8 +16,11 @@ namespace ShopProjectAPP
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
-
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
