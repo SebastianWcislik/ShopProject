@@ -11,5 +11,11 @@ namespace ShopProjectAPPAPI.Controllers
         {
             return Ok("asd");
         }
+
+        [HttpGet]
+        public IActionResult Test2()
+        {
+            return Ok("asdasd");
+        }
     }
 }
