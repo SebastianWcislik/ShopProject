@@ -11,7 +11,7 @@ namespace ShopProjectAPP.Controllers
 
         public ProductController(IProductRepository productRepository)
         {
-            _productRepository = _productRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<IActionResult> Index()

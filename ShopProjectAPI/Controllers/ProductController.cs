@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ShopProjectAPPAPI.Controllers
+namespace ShopProjectAPI.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class HomeController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> TestASync()
-        {
-            return Ok("asd");
-        }
-
         [HttpGet]
         public IActionResult Test()
         {
