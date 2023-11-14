@@ -9,7 +9,10 @@ namespace ShopProjectAPI.Controllers
         [HttpGet]
         public IActionResult Test()
         {
-            return Ok("asd");
+            var result = new List<string>();
+            result.Add("asd");
+            result.Add("asd111");
+            return Ok(result);
         }
     }
 }

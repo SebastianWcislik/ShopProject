@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using ShopProjectAPP.Helpers;
 using ShopProjectAPP.Models;
 using System.Diagnostics;
 
@@ -6,15 +8,25 @@ namespace ShopProjectAPP.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        HttpClient client;
+        GetResponse responseHelper = new GetResponse();
+        IMemoryCache cache;
+        // dodanie klasy z obsługą koszyka zakupowego
+        // cachowanie danych 
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMemoryCache cache)
         {
-            _logger = logger;
+            client = new HttpClient();
+            this.cache = cache;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            //var result = await responseHelper.GetResponseAsync<List<string>>(client, "https://localhost:44332/Product/Test");
+            //var resultCart = new List<string>();
+            //cache.Set<List<string>>("cart1", resultCart);
+
+            //var getCart = cache.Get<List<string>>("cart1");
             return View(new ErrorViewModel());
         }
 
