@@ -1,3 +1,7 @@
+using Microsoft.OpenApi.Models;
+using ShopProjectAPI.DB;
+using ShopProjectAPI.Interfaces;
+using ShopProjectAPI.Repository;
 
 namespace ShopProjectAPPAPI
 {
@@ -12,7 +16,34 @@ namespace ShopProjectAPPAPI
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Token", new OpenApiSecurityScheme()
+                {
+                    Description = "JWT Token",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Token"
+                            }
+                        },
+                    new List<string>()
+                    }
+                });
+            });
+
+            builder.Services.AddDbContext<ShopprojectContext>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
 

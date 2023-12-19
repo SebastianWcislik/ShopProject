@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopProjectAPI.Attributes;
 
 namespace ShopProjectAPI.Controllers
 {
     [ApiController]
+    [Bearer]
     [Route("[controller]/[action]")]
-    public class ProductController : ControllerBase
+    public class CarController : ControllerBase
     {
         [HttpGet]
         public IActionResult Test()
         {
-            var result = new List<string>();
-            result.Add("asd");
-            result.Add("asd111");
-            return Ok(result);
+            return Ok("test");
         }
     }
 }
