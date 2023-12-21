@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
@@ -42,7 +43,10 @@ namespace ShopProjectAPPAPI
                 });
             });
 
-            builder.Services.AddDbContext<ShopprojectContext>();
+            builder.Services.AddDbContext<ShopprojectContext>(x =>
+            {
+                x.UseMySql(builder.Configuration.GetValue<string>("ConnectionString"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
+            });
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             var app = builder.Build();
@@ -53,6 +57,13 @@ namespace ShopProjectAPPAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(x =>
+            {
+                x.WithHeaders("Authorization");
+                x.AllowAnyMethod();
+                x.WithOrigins("https://localhost:44357");
+            });
 
             app.UseAuthorization();
 
