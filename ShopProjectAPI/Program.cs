@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
@@ -57,6 +58,12 @@ namespace ShopProjectAPPAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            //app.UseCors(policy =>
+            //    policy.WithOrigins("http://localhost:7044", "https://localhost:7044")
+            //    .AllowAnyMethod()
+            //    .WithHeaders(HeaderNames.ContentType)
+            //);
 
             app.UseCors(x =>
             {

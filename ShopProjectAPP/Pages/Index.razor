@@ -1,26 +1,7 @@
 ﻿@page "/"
-@using ShopProjectAPP.ViewModel
-@inject ProductViewModel product
 
-<PageTitle>Index</PageTitle>
+<h3>Index</h3>
 
-@if (product.users == null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    @foreach (var user in product.users)
-    {
-        <b>@user.Username</b>
-        <b>@user.Password</b>
-        <hr>
-    }
-}
+@code {
 
-@code{
-    protected override async Task OnInitializedAsync()
-    {
-        await product.Test();
-    }
 }
