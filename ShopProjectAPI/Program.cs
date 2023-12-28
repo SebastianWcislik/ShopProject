@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
@@ -49,6 +48,7 @@ namespace ShopProjectAPPAPI
                 x.UseMySql(builder.Configuration.GetValue<string>("ConnectionString"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
             });
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 
             var app = builder.Build();
 
@@ -58,12 +58,6 @@ namespace ShopProjectAPPAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
-            //app.UseCors(policy =>
-            //    policy.WithOrigins("http://localhost:7044", "https://localhost:7044")
-            //    .AllowAnyMethod()
-            //    .WithHeaders(HeaderNames.ContentType)
-            //);
 
             app.UseCors(x =>
             {

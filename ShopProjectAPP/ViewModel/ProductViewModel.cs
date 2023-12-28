@@ -1,23 +1,31 @@
-﻿using ShopProjectAPP.Helpers;
-using ShopProjectExternalModel.User;
+﻿using Microsoft.AspNetCore.Components;
+using ShopProjectAPP.Helpers;
+using ShopProjectExternalModel.Product;
 
 namespace ShopProjectAPP.ViewModel
 {
-    public class ProductViewModel : HttpHelpers
+    public class ProductViewModel : ComponentBase
     {
-        public string url { get; set; }
+        public HttpHelpers httpHelper;
 
-        public ProductViewModel(IConfiguration config)
+        public ProductViewModel()
         {
-            this.url = config.GetValue<string>("HttpAddress");
+            this.httpHelper = new HttpHelpers();
         }
 
-        public UserLoginModel[] users { get; set; }
+        public ProductDto[] Products { get; set; }
 
-        public async Task Test()
+        public async Task<ProductDto[]> GetProducts()
         {
-            var result = await GetResponse<UserLoginModel[]>(url + "/Car/Test");
-            users = result;
+            var result = await httpHelper.GetResponse<ProductDto[]>(Program.url + "/Products/GetProducts");
+            return result;
+        }
+
+        protected override async void OnInitialized()
+        {
+            var result = await GetProducts();
+            Products = result;
+            StateHasChanged();
         }
     }
 }

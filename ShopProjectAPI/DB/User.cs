@@ -1,4 +1,7 @@
-﻿namespace ShopProjectAPI.DB;
+﻿using System;
+using System.Collections.Generic;
+
+namespace ShopProjectAPI.DB;
 
 public partial class User
 {
