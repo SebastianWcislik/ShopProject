@@ -1,35 +1,35 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShopProjectAPP.Helpers;
-using ShopProjectExternalModel.Product;
+using ShopProjectExternalModel.Game;
 
 namespace ShopProjectAPP.ViewModel
 {
-    public class ProductDetailViewModel : ComponentBase
+    public class GameDetailViewModel : ComponentBase
     {
         [Parameter]
         public int Id { get; set; }
-        public ProductDto Product { get; set; }
+        public GameDto Game { get; set; }
         public HttpHelpers httpHelper { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public ProductDetailViewModel() 
+        public GameDetailViewModel()
         {
             this.httpHelper = new HttpHelpers();
         }
 
-        public async Task<ProductDto> GetProduct()
+        public async Task<GameDto> GetGame()
         {
-            var result = await httpHelper.GetResponse<ProductDto>(Program.url + "/Products/GetProduct?Id=" + Id);
+            var result = await httpHelper.GetResponse<GameDto>(Program.url + "/Games/GetGame?Id=" + Id);
             return result;
         }
 
         protected override async void OnInitialized()
         {
-            var result = await GetProduct();
+            var result = await GetGame();
             if (result != null)
             {
-                Product = result;
+                Game = result;
                 StateHasChanged();
             }
             else

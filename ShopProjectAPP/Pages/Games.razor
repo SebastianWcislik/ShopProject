@@ -1,0 +1,15 @@
+﻿@page "/games"
+@inherits GameViewModel
+
+@if(Games == null)
+{
+    <h3>Loading products !...</h3>
+}
+else
+{
+    <h3 class="mb5">Promocje</h3>
+
+    <div class="row mt-3">
+        <DisplayGames></DisplayGames>
+    </div>
+}

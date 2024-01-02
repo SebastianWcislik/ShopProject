@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopProjectExternalModel.Product
+namespace ShopProjectExternalModel.Game
 {
-    public class ProductDto
+    public class GameDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

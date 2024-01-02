@@ -1,23 +1,23 @@
 ﻿using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
-using ShopProjectExternalModel.Product;
+using ShopProjectExternalModel.Game;
 
 #nullable disable
 
 namespace ShopProjectAPI.Repository
 {
-    public class ProductsRepository : IProductsRepository
+    public class GamesRepository : IGamesRepository
     {
         public ShopprojectContext db { get; set; }
 
-        public ProductsRepository(ShopprojectContext db)
+        public GamesRepository(ShopprojectContext db)
         {
             this.db = db;
         }
 
-        public ProductDto[] GetProducts()
+        public GameDto[] GetGames()
         {
-            var result = db.Products.Join(db.ProductCategories, c => c.CategoryId, d => d.Id, (p, pc) => new ProductDto
+            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => new GameDto
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -31,9 +31,9 @@ namespace ShopProjectAPI.Repository
             return result;
         }
 
-        public ProductDto GetProduct(int id)
+        public GameDto GetGame(int id)
         {
-            var result = db.Products.Join(db.ProductCategories, c => c.CategoryId, d => d.Id, (p, pc) => new ProductDto
+            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => new GameDto
             {
                 Id = p.Id,
                 Name = p.Name,

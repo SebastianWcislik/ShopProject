@@ -15,9 +15,9 @@ public partial class ShopprojectContext : DbContext
     {
     }
 
-    public virtual DbSet<Product> Products { get; set; }
+    public virtual DbSet<Game> Games { get; set; }
 
-    public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+    public virtual DbSet<GameCategory> GameCategories { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -27,11 +27,11 @@ public partial class ShopprojectContext : DbContext
             .UseCollation("utf8mb4_0900_ai_ci")
             .HasCharSet("utf8mb4");
 
-        modelBuilder.Entity<Product>(entity =>
+        modelBuilder.Entity<Game>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("Product");
+            entity.ToTable("Game");
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 
@@ -52,17 +52,17 @@ public partial class ShopprojectContext : DbContext
                 .HasCharSet("utf8mb3");
             entity.Property(e => e.Price).HasPrecision(10);
 
-            entity.HasOne(d => d.Category).WithMany(p => p.Products)
+            entity.HasOne(d => d.Category).WithMany(p => p.Games)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ProductToProductCategory");
+                .HasConstraintName("GameToGameCategory");
         });
 
-        modelBuilder.Entity<ProductCategory>(entity =>
+        modelBuilder.Entity<GameCategory>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.ToTable("ProductCategory");
+            entity.ToTable("GameCategory");
 
             entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
 

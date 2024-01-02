@@ -1,11 +1,11 @@
 ﻿@inherits ProductViewModel
 
-@if (Products != null)
+@if (Games != null)
 {
-    @foreach (var item in Products)
+    @foreach (var item in Games)
     {
         <div class="col-md-3 mb-2">
-            <a href="/productDetail/@item.Id">
+            <a href="/gameDetail/@item.Id">
                 <div class="card">
                     <img class="img-thumbnail" src="@item.ImageURL">
                     <div class="card-body">

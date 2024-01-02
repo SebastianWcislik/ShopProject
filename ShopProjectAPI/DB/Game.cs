@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ShopProjectAPI.DB;
 
-public partial class Product
+public partial class Game
 {
     public int Id { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Product
 
     public int CategoryId { get; set; }
 
-    public virtual ProductCategory Category { get; set; } = null!;
+    public virtual GameCategory Category { get; set; } = null!;
 }

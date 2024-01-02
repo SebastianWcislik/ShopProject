@@ -7,7 +7,7 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped<ProductViewModel>();
+builder.Services.AddScoped<GameViewModel>();
 
 url = builder.Configuration.GetValue<string>("HttpAddress");
 
