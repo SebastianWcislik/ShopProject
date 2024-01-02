@@ -49,7 +49,7 @@ namespace ShopProjectAPPAPI
             });
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             //builder.Services.AddScoped<IGamesRepository, GamesRepository>();
-            builder.Services.AddScoped<IGameRepository, GamesRepository>();
+            builder.Services.AddScoped<IGamesRepository, GamesRepository>();
 
             var app = builder.Build();
 

@@ -50,12 +50,12 @@ public partial class ShopprojectContext : DbContext
                 .HasMaxLength(100)
                 .UseCollation("utf8mb3_general_ci")
                 .HasCharSet("utf8mb3");
-            entity.Property(e => e.Price).HasPrecision(10);
+            entity.Property(e => e.Price).HasPrecision(10, 2);
 
             entity.HasOne(d => d.Category).WithMany(p => p.Games)
                 .HasForeignKey(d => d.CategoryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("GameToGameCategory");
+                .HasConstraintName("ProductToProductCategory");
         });
 
         modelBuilder.Entity<GameCategory>(entity =>

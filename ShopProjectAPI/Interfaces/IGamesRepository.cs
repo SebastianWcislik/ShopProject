@@ -2,7 +2,7 @@
 
 namespace ShopProjectAPI.Interfaces
 {
-    public interface IGameRepository
+    public interface IGamesRepository
     {
         GameDto GetGame(int id);
         GameDto[] GetGames();
