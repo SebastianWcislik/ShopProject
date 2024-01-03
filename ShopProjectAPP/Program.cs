@@ -8,6 +8,7 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped<GameViewModel>();
+builder.Services.AddScoped<NavMenuViewModel>();
 
 url = builder.Configuration.GetValue<string>("HttpAddress");
 

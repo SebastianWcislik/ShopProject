@@ -1,15 +1,16 @@
-﻿@page "/games"
+﻿@page "/"
+@page "/Games/{CategoryId:int}"
 @inherits GameViewModel
 
 @if(Games == null)
 {
-    <h3>Loading products !...</h3>
+    <h3>Ładowanie gier...</h3>
 }
 else
 {
-    <h3 class="mb5">Promocje</h3>
+    <h3 class="mb5">@GameCategory</h3>
 
     <div class="row mt-3">
-        <DisplayGames></DisplayGames>
+        <DisplayGames @ref="dg"></DisplayGames>
     </div>
 }

@@ -7,7 +7,7 @@
         <div class="col-md-3 mb-2">
             <a href="/gameDetail/@item.Id">
                 <div class="card">
-                    <img class="img-thumbnail" src="@item.ImageURL">
+                    <img src="@item.ImageURL">
                     <div class="card-body">
                         <h5 class="card-title mb-3">
                             @item.Name
@@ -19,5 +19,13 @@
                 </div>
             </a>
         </div>
+    }
+}
+
+@code {
+    public void SetGames(GameModel[] gm)
+    {
+        Games = gm;
+        StateHasChanged();
     }
 }

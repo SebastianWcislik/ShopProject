@@ -20,7 +20,7 @@ namespace ShopProjectAPI.Repository
 
         public GameModel[] GetGames()
         {
-            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => gm.MapToGameWithCategoryModel(p, pc)).ToArray();
+            var result = db.Games.Select(x => gm.MapToGameModel(x)).ToArray();
 
             return result;
         }
@@ -43,7 +43,7 @@ namespace ShopProjectAPI.Repository
 
         public GameModel[] GetGamesByCategory(int categoryId)
         {
-            var result = db.Games.Where(x => x.CategoryId == categoryId).Select(x => gm.MapToGameModel(x)).ToArray();
+            var result = db.Games.Where(x => x.CategoryId == categoryId).Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => gm.MapToGameWithCategoryModel(p, pc)).ToArray();
 
             if (result != null) return result;
             else return null;
