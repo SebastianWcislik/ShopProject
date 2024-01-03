@@ -8,7 +8,7 @@ namespace ShopProjectAPP.ViewModel
     {
         [Parameter]
         public int Id { get; set; }
-        public GameDto Game { get; set; }
+        public GameModel Game { get; set; }
         public HttpHelpers httpHelper { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -18,9 +18,9 @@ namespace ShopProjectAPP.ViewModel
             this.httpHelper = new HttpHelpers();
         }
 
-        public async Task<GameDto> GetGame()
+        public async Task<GameModel> GetGame()
         {
-            var result = await httpHelper.GetResponse<GameDto>(Program.url + "/Games/GetGame?Id=" + Id);
+            var result = await httpHelper.GetResponse<GameModel>(Program.url + "/Games/GetGame?Id=" + Id);
             return result;
         }
 

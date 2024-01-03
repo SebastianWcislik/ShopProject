@@ -1,5 +1,6 @@
 ﻿using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
+using ShopProjectAPI.Mappers;
 using ShopProjectExternalModel.Game;
 
 #nullable disable
@@ -9,40 +10,40 @@ namespace ShopProjectAPI.Repository
     public class GamesRepository : IGamesRepository
     {
         public ShopprojectContext db { get; set; }
+        public GameMapper gm { get; set; }
 
-        public GamesRepository(ShopprojectContext db)
+        public GamesRepository(ShopprojectContext db, GameMapper gm)
         {
             this.db = db;
+            this.gm = gm;
         }
 
-        public GameDto[] GetGames()
+        public GameModel[] GetGames()
         {
-            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => new GameDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                ImageURL = p.ImageUrl,
-                Price = p.Price,
-                CategoryId = pc.Id,
-                CategoryName = pc.Name
-            }).ToArray();
+            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => gm.MapToGameWithCategoryModel(p, pc)).ToArray();
 
             return result;
         }
 
-        public GameDto GetGame(int id)
+        public GameModel GetGame(int id)
         {
-            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => new GameDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Description = p.Description,
-                ImageURL = p.ImageUrl,
-                Price = p.Price,
-                CategoryId = pc.Id,
-                CategoryName = pc.Name
-            }).FirstOrDefault(x => x.Id == id);
+            var result = db.Games.Join(db.GameCategories, c => c.CategoryId, d => d.Id, (p, pc) => gm.MapToGameWithCategoryModel(p, pc)).AsEnumerable().FirstOrDefault(x => x.Id == id);
+
+            if (result != null) return result;
+            else return null;
+        }
+
+        public GameCategoryModel[] GetGameCategories()
+        {
+            var result = db.GameCategories.Select(x => gm.MapToGameCategoryModel(x)).ToArray();
+
+            if (result != null) return result;
+            else return null;
+        }
+
+        public GameModel[] GetGamesByCategory(int categoryId)
+        {
+            var result = db.Games.Where(x => x.CategoryId == categoryId).Select(x => gm.MapToGameModel(x)).ToArray();
 
             if (result != null) return result;
             else return null;

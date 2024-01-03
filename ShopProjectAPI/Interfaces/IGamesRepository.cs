@@ -4,7 +4,9 @@ namespace ShopProjectAPI.Interfaces
 {
     public interface IGamesRepository
     {
-        GameDto GetGame(int id);
-        GameDto[] GetGames();
+        GameModel GetGame(int id);
+        GameModel[] GetGames();
+        GameCategoryModel[] GetGameCategories();
+        GameModel[] GetGamesByCategory(int categoryId);
     }
 }

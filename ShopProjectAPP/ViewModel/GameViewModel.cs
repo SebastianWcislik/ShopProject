@@ -13,11 +13,11 @@ namespace ShopProjectAPP.ViewModel
             this.httpHelper = new HttpHelpers();
         }
 
-        public GameDto[] Games { get; set; }
+        public GameModel[] Games { get; set; }
 
-        public async Task<GameDto[]> GetGames()
+        public async Task<GameModel[]> GetGames()
         {
-            var result = await httpHelper.GetResponse<GameDto[]>(Program.url + "/Games/GetGames");
+            var result = await httpHelper.GetResponse<GameModel[]>(Program.url + "/Games/GetGames");
             return result;
         }
 

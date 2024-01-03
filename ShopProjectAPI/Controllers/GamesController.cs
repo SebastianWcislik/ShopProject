@@ -29,5 +29,19 @@ namespace ShopProjectAPI.Controllers
             var result = gamesRepository.GetGame(id);
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult GetGameCategories()
+        {
+            var result = gamesRepository.GetGameCategories();
+            return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult GetGamesByCategory([FromQuery]int categoryId)
+        {
+            var result = gamesRepository.GetGamesByCategory(categoryId);
+            return Ok(result);
+        }
     }
 }

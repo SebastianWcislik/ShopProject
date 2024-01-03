@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
+using ShopProjectAPI.Mappers;
 using ShopProjectAPI.Repository;
 
 namespace ShopProjectAPPAPI
@@ -50,6 +51,7 @@ namespace ShopProjectAPPAPI
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             //builder.Services.AddScoped<IGamesRepository, GamesRepository>();
             builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+            builder.Services.AddScoped<GameMapper>();
 
             var app = builder.Build();
 
