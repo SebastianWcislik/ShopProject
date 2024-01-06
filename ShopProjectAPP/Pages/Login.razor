@@ -1,0 +1,52 @@
+﻿@page "/login"
+@inherits UserLoginViewModel
+
+<h2 class="text-dark pt-2 pb-3">Zaloguj się do konta</h2>
+
+<div class="row backgroundWhite border col-6">
+
+    <EditForm method="post" OnSubmit="UserLogin" EditContext="@editContext">
+        <DataAnnotationsValidator />
+
+        <div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userLogin.Username">Nazwa użytkownika</label>
+                    </div>
+                    <div class="col-8">
+                        <input @bind-value="userLogin.Username" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userLogin.Username" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userLogin.Password">Hasło</label>
+                    </div>
+                    <div class="col-8">
+                        <input @bind-value="userLogin.Password" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userLogin.Password" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-success form-control">Zaloguj</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-danger form-control" @onclick="NavigateToMainMenu">Powrót</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </EditForm>
+</div>

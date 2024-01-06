@@ -1,6 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using Newtonsoft.Json;
+﻿using Blazored.LocalStorage;
+using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using ShopProjectAPP.Helpers;
+using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
 namespace ShopProjectAPP.ViewModel
@@ -15,14 +18,57 @@ namespace ShopProjectAPP.ViewModel
         }
 
         public UserRegisterModel userRegister {  get; set; }
+        public EditContext editContext { get; set; }
+        public ValidationMessageStore editContextErrors { get; set; }
+        [Inject]
+        public IToastService toastService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
-        public async Task<bool> UserRegistration()
+        public async void UserRegistration()
         {
-            string json = JsonConvert.SerializeObject(userRegister, Formatting.Indented);
-            var jsonContent = new StringContent(json);
-            var result = await httpHelpers.PostResponse<bool>(Program.url + "/User/Register", jsonContent);
+            if (editContext.Validate())
+            {
+                var result = await httpHelpers.PostResponse<UserRegistrationMessage>(Program.url + "/User/Register", editContext.Model);
 
-            return result;
+                if (result.Errors != null)
+                {
+                    editContextErrors.Clear();
+                    foreach (var error in result.Errors)
+                    {
+                        var field = editContext.Field(error.Key);
+                        editContextErrors.Add(field, error.Value);
+                    }
+                    editContext.NotifyValidationStateChanged();
+                    StateHasChanged();
+                }
+                else
+                {
+                    toastService.ShowSuccess("Rejestracja użytkownika została przeprowadzona pomyślnie.");
+                    userRegister = new UserRegisterModel();
+                    StateHasChanged();
+                }
+            }
+        }
+
+        protected override void OnInitialized()
+        {
+            userRegister = new UserRegisterModel();
+            editContext = new EditContext(userRegister);
+            editContext.OnFieldChanged += EditContext_OnFieldChanged;
+            editContextErrors = new ValidationMessageStore(editContext);
+        }
+
+        private void EditContext_OnFieldChanged(object? sender, FieldChangedEventArgs e)
+        {
+            editContextErrors.Clear(e.FieldIdentifier);
+            editContext.NotifyValidationStateChanged();
+            StateHasChanged();
+        }
+
+        public void NavigateToMainMenu()
+        {
+            NavigationManager.NavigateTo("/");
         }
     }
 }

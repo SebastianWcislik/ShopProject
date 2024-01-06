@@ -64,7 +64,7 @@ namespace ShopProjectAPPAPI
 
             app.UseCors(x =>
             {
-                x.WithHeaders("Authorization");
+                x.AllowAnyHeader();
                 x.AllowAnyMethod();
                 x.WithOrigins("https://localhost:44357");
             });

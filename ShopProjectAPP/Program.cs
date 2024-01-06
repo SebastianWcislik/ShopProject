@@ -1,3 +1,5 @@
+using Blazored.LocalStorage;
+using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ShopProjectAPP;
@@ -9,6 +11,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped<GameViewModel>();
 builder.Services.AddScoped<NavMenuViewModel>();
+builder.Services.AddBlazoredToast();
+builder.Services.AddBlazoredLocalStorage();
 
 url = builder.Configuration.GetValue<string>("HttpAddress");
 

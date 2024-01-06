@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using System.Net.Http.Json;
+using System.Text;
 
 #nullable disable
 
@@ -25,14 +27,17 @@ namespace ShopProjectAPP.Helpers
             return resultObejct;
         }
 
-        public async ValueTask<T> PostResponse<T>(string path, StringContent content)
+        public async ValueTask<T> PostResponse<T>(string path, object content)
         {
-            var result = await http.PostAsync(path, content);
+            string json = JsonConvert.SerializeObject(content);
+            var jsonContent = new StringContent(json,  Encoding.UTF8, "application/json");
+
+            var result = await http.PostAsync(path, jsonContent);
             T resultObejct = default;
             if (result != null)
             {
-                var resultMess = await result.Content.ReadAsStringAsync();
-                resultObejct = JsonConvert.DeserializeObject<T>(resultMess);
+                var resultMessage = await result.Content.ReadAsStringAsync();
+                resultObejct = JsonConvert.DeserializeObject<T>(resultMessage);
             }
             return resultObejct;
         }

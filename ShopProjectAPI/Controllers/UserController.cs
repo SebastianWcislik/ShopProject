@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProjectAPI.Attributes;
 using ShopProjectAPI.Interfaces;
+using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
 namespace ShopProjectAPI.Controllers
@@ -18,14 +19,14 @@ namespace ShopProjectAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromQuery]UserLoginModel userLogin)
+        public IActionResult Login([FromBody]UserLoginModel userLogin)
         {
             var result = user.Login(userLogin);
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult Register([FromQuery]UserRegisterModel userRegister)
+        public IActionResult Register([FromBody]UserRegisterModel userRegister)
         {
             var result = user.Register(userRegister);
             return Ok(result);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using ShopProjectAPP.Helpers;
 using ShopProjectExternalModel.Game;
 
@@ -36,6 +37,11 @@ namespace ShopProjectAPP.ViewModel
             {
                 NavigationManager.NavigateTo("/");
             }
+        }
+
+        public void NavigateToMainMenu()
+        {
+            NavigationManager.NavigateTo("/");
         }
     }
 }

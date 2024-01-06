@@ -1,5 +1,6 @@
 ﻿using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
+using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
 namespace ShopProjectAPI.Repository
@@ -36,15 +37,30 @@ namespace ShopProjectAPI.Repository
             }
         }
 
-        public bool Register(UserRegisterModel userRegister)
+        public UserRegistrationMessage Register(UserRegisterModel userRegister)
         {
             if (String.IsNullOrWhiteSpace(userRegister.Username)) throw new Exception("Nazwa użytkownika nie może byc pusta");
             if (String.IsNullOrWhiteSpace(userRegister.Password)) throw new Exception("Hasło nie może być puste");
             if (String.IsNullOrWhiteSpace(userRegister.Email)) throw new Exception("Email nie może być pusty");
 
-            var checkUserRegister = db.Users.Any(x => x.Username == userRegister.Username && x.Email == userRegister.Email);
-            if (checkUserRegister) throw new Exception("Użytkownik o podanych parametrach już występuje");
-            else
+            var resultMessage = new UserRegistrationMessage();
+            resultMessage.Errors = new Dictionary<string, string>();
+
+            var checkUsernameRegister = db.Users.Any(x => x.Username == userRegister.Username);
+            if (checkUsernameRegister)
+            {
+                resultMessage.isSuccess = false;
+                resultMessage.Errors.Add("Username", "Użytkownik o podanej nazwie już istnieje");
+            }
+
+            var checkUserEmailRegister = db.Users.Any(x => x.Email == userRegister.Email);
+            if (checkUserEmailRegister)
+            {
+                resultMessage.isSuccess = false;
+                resultMessage.Errors.Add("Email", "Użytkownik o podanym mailu już istnieje");
+            }
+
+            if (!checkUsernameRegister && !checkUserEmailRegister)
             {
                 db.Users.Add(new User 
                 { 
@@ -53,7 +69,14 @@ namespace ShopProjectAPI.Repository
                     Email = userRegister.Email,
                 });
                 db.SaveChanges();
-                return true;
+
+                resultMessage.isSuccess = true;
+                resultMessage.Errors = null;
+                return resultMessage;
+            }
+            else
+            {
+                return resultMessage;
             }
         }
     }

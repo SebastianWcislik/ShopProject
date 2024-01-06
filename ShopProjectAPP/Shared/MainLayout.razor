@@ -1,11 +1,19 @@
-﻿@inherits LayoutComponentBase
+﻿@using Blazored.LocalStorage
+@inherits LayoutComponentBase
 
 <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
 
+    <BlazoredToasts Position="ToastPosition.TopRight"
+                    Timeout="4"
+                    ShowProgressBar="true" />
+
     <main>
+@*         <div>
+            Zalogowany jako, @Username
+        </div> *@
         <div class="top-row px-4">
             <a href="/cart" style="text-decoration: none">Koszyk</a>
             <a hidden href="/register" style="text-decoration: none">Zarządzaj</a>
@@ -18,3 +26,24 @@
         </article>
     </main>
 </div>
+
+@code {
+    [Inject]
+    public ILocalStorageService local { get; set; }
+    public string Username { get; set; }
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        await SetLogin();
+    }
+
+    public async Task SetLogin()
+    {
+        var login = await local.GetItemAsync<string>("Username");
+        if (Username != login)
+        {
+            Username = login;
+            StateHasChanged();
+        }
+    }
+}

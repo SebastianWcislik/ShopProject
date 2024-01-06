@@ -1,77 +1,76 @@
 ﻿@page "/register"
-@using ShopProjectExternalModel.User
 @inherits UserRegisterViewModel
 
-<h2 class="text-info pt-2 pb-3">Create a new account</h2>  
-  
-<div class="row backgroundWhite border">  
-  
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@httpHelpers" method="post">  
-            <div asp-validation-summary="All" class="text-danger"></div>  
-            <div class="form-group">  
-                <div class="row">  
-                    <div class="col-4">  
-                        <label asp-for="Input.Username"></label>  
-                    </div>  
-                    <div class="col-4">  
-                        <input asp-for="Input.Username" class="form-control" />  
-                    </div>  
-                    <span asp-validation-for="Input.Username" class="text-danger"></span>  
-                </div>  
-            </div>  
-  
-            <div class="form-group">  
-                <div class="row">  
-                    <div class="col-4">  
-                        <label asp-for="Input.Email"></label>  
-                    </div>  
-                    <div class="col-4">  
-                        <input asp-for="Input.Email" class="form-control" />  
-                    </div>  
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>  
-                </div>  
-            </div>  
-  
-            <div class="form-group">  
-                <div class="row">  
-                    <div class="col-4">  
-                        <label asp-for="Input.Password"></label>  
-                    </div>  
-                    <div class="col-4">  
-                        <input asp-for="Input.Password" class="form-control" />  
-                    </div>  
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>  
-                </div>  
-            </div>  
-  
-            <div class="form-group">  
-                <div class="row">  
-                    <div class="col-4">  
-                        <label asp-for="Input.ConfirmPassword"></label>  
-                    </div>  
-                    <div class="col-4">  
-                        <input asp-for="Input.ConfirmPassword" class="form-control" />  
-                    </div>  
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>  
-                </div>  
-            </div>  
-  
-            <div class="form-group">  
-                <div class="row">  
-                    <div class="col-4">  
-                          
-                    </div>  
-                    <div class="col-4">  
-                        <button type="submit" class="btn btn-success form-control">Register</button>  
-                    </div>  
-                      
-                </div>  
-            </div>  
-        </form>  
-    </div>  
-</div>  
-  
-@* Scripts {  
-    <partial name="_ValidationScriptsPartial" />  
-} *@
+<h2 class="text-dark pt-2 pb-3">Utwórz nowe konto</h2>
+
+<div class="row backgroundWhite border col-6">
+
+    <EditForm method="post" OnSubmit="UserRegistration" EditContext="@editContext">
+        <DataAnnotationsValidator />
+
+        <div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userRegister.Username">Nazwa użytkownika</label>
+                    </div>
+                    <div class="col-8">
+                        <InputText @bind-Value="userRegister.Username" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userRegister.Username" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userRegister.Email">Email</label>
+                    </div>
+                    <div class="col-8">
+                        <InputText @bind-Value="userRegister.Email" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userRegister.Email" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userRegister.Password">Hasło</label>
+                    </div>
+                    <div class="col-8">
+                        <InputText type="password" @bind-Value="userRegister.Password" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userRegister.Password" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="@userRegister.PasswordConfirm">Potwierdź hasło</label>
+                    </div>
+                    <div class="col-8">
+                        <InputText type="password" @bind-Value="userRegister.PasswordConfirm" class="form-control" />
+                    </div>
+                    <ValidationMessage For="() => userRegister.PasswordConfirm" />
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-success form-control">Potwierdź</button>
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-danger form-control" @onclick="NavigateToMainMenu">Powrót</button>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </EditForm>
+</div>
