@@ -1,0 +1,24 @@
+﻿@page "/cart"
+@inherits CartViewModel
+
+@if (Cart == null || Cart.Count == 0)
+{
+    <div>
+        @LoadingText
+    </div>
+}
+else
+{
+    <table>
+        @foreach (var item in Cart)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImageURL" />
+
+                    @item.Name
+                </td>
+            </tr>
+        }
+    </table>
+}

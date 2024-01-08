@@ -12,16 +12,15 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="/cart" style="text-decoration: none">Koszyk</a>
-            <a hidden href="/register" style="text-decoration: none">Zarządzaj</a>
             @if (Username == null || String.IsNullOrWhiteSpace(Username))
             {
                 <a href="/login" style="text-decoration: none">Zaloguj</a>
             }
             else
             {
+                <a href="/cart" style="text-decoration: none">Koszyk</a>
                 <a href="/" @onclick="LogOut" style="text-decoration: none">Wyloguj</a>
-                <a style="text-decoration: none; color: forestgreen">
+                <a href="/myAccount" style="text-decoration: none; color: forestgreen">
                     Zalogowany jako, @Username
                 </a>
             }
@@ -57,6 +56,7 @@
 
     public async Task LogOut()
     {
+        await local.RemoveItemAsync("Cart" + await local.GetItemAsync<int>("UserId"));
         await local.RemoveItemAsync("Username");
         await local.RemoveItemAsync("UserId");
         toast.ShowSuccess("Udało się wylogować");

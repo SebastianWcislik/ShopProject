@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using ShopProjectAPP.Helpers;
+using ShopProjectExternalModel.Cart;
 using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
@@ -33,8 +34,9 @@ namespace ShopProjectAPP.ViewModel
             if (editContext.Validate())
             {
                 var result = await httpHelpers.PostResponse<UserLoginMessage>(Program.url + "/User/Login", editContext.Model);
-                await local.SetItemAsync<string>("Username", result.Username);
-                await local.SetItemAsync<int>("UserId", result.UserId);
+                await local.SetItemAsync("Username", result.Username);
+                await local.SetItemAsync("UserId", result.UserId);
+                await local.SetItemAsync("Cart" + result.UserId, new List<CartModel> { });
                 toast.ShowSuccess("Udało się zalogować");
                 NavigationManager.NavigateTo("/");
             }
