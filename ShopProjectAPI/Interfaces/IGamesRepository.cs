@@ -8,5 +8,6 @@ namespace ShopProjectAPI.Interfaces
         GameModel[] GetGames();
         GameCategoryModel[] GetGameCategories();
         GameModel[] GetGamesByCategory(int categoryId);
+        bool CheckGameById(int GameId);
     }
 }

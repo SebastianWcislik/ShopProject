@@ -7,5 +7,6 @@ namespace ShopProjectAPI.Interfaces
     {
         bool Login(UserLoginModel userLogin);
         UserRegistrationMessage Register (UserRegisterModel userRegister);
+        bool CheckUserById(int UserId);
     }
 }

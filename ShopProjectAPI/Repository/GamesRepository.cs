@@ -48,5 +48,11 @@ namespace ShopProjectAPI.Repository
             if (result != null) return result;
             else return null;
         }
+
+        public bool CheckGameById(int GameId)
+        {
+            if (db.Games.FirstOrDefault(x => x.Id == GameId) == null) return false;
+            else return true;
+        }
     }
 }

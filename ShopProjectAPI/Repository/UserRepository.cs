@@ -79,5 +79,11 @@ namespace ShopProjectAPI.Repository
                 return resultMessage;
             }
         }
+
+        public bool CheckUserById(int UserId)
+        {
+            if (db.Users.FirstOrDefault(x => x.Id == UserId) == null) return false;
+            else return true;
+        }
     }
 }

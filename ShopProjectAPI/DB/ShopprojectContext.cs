@@ -19,6 +19,10 @@ public partial class ShopprojectContext : DbContext
 
     public virtual DbSet<GameCategory> GameCategories { get; set; }
 
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderGame> OrderGames { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,10 +41,7 @@ public partial class ShopprojectContext : DbContext
 
             entity.HasIndex(e => e.CategoryId, "ProductToProductCategory_idx");
 
-            entity.Property(e => e.Description)
-                .HasMaxLength(100)
-                .UseCollation("utf8mb3_general_ci")
-                .HasCharSet("utf8mb3");
+            entity.Property(e => e.Description).HasMaxLength(1000);
             entity.Property(e => e.ImageUrl)
                 .HasMaxLength(100)
                 .HasColumnName("ImageURL")
@@ -70,6 +71,51 @@ public partial class ShopprojectContext : DbContext
                 .HasMaxLength(100)
                 .UseCollation("utf8mb3_general_ci")
                 .HasCharSet("utf8mb3");
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("Order");
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.UserId, "UserToOrder_idx");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("UserToOrder");
+        });
+
+        modelBuilder.Entity<OrderGame>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.HasIndex(e => e.Id, "Id_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.GameId, "OrderGamesToGame_idx");
+
+            entity.HasIndex(e => e.OrderId, "OrderIndex");
+
+            entity.Property(e => e.Key)
+                .HasMaxLength(50)
+                .HasColumnName("KEY")
+                .UseCollation("utf8mb3_general_ci")
+                .HasCharSet("utf8mb3");
+
+            entity.HasOne(d => d.Game).WithMany(p => p.OrderGames)
+                .HasForeignKey(d => d.GameId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("OrderGamesToGame");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderGames)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("OrderGamesToOrder");
         });
 
         modelBuilder.Entity<User>(entity =>

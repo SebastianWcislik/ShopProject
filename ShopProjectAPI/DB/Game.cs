@@ -18,4 +18,6 @@ public partial class Game
     public int CategoryId { get; set; }
 
     public virtual GameCategory Category { get; set; } = null!;
+
+    public virtual ICollection<OrderGame> OrderGames { get; set; } = new List<OrderGame>();
 }

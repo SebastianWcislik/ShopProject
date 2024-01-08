@@ -49,9 +49,10 @@ namespace ShopProjectAPPAPI
                 x.UseMySql(builder.Configuration.GetValue<string>("ConnectionString"), Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.2.0-mysql"));
             });
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            //builder.Services.AddScoped<IGamesRepository, GamesRepository>();
             builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<GameMapper>();
+            builder.Services.AddScoped<OrderMapper>();
 
             var app = builder.Build();
 
