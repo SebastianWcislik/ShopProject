@@ -16,7 +16,7 @@
                         <label for="@userLogin.Username">Nazwa użytkownika</label>
                     </div>
                     <div class="col-8">
-                        <input @bind-value="userLogin.Username" class="form-control" />
+                        <InputText @bind-Value="userLogin.Username" class="form-control" />
                     </div>
                     <ValidationMessage For="() => userLogin.Username" />
                 </div>
@@ -28,7 +28,7 @@
                         <label for="@userLogin.Password">Hasło</label>
                     </div>
                     <div class="col-8">
-                        <input @bind-value="userLogin.Password" class="form-control" />
+                        <InputText @bind-Value="userLogin.Password" class="form-control" />
                     </div>
                     <ValidationMessage For="() => userLogin.Password" />
                 </div>
@@ -37,6 +37,7 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-4">
+                        <button class="btn btn-success form-control" @onclick="Register">Zarejestruj</button>
                     </div>
                     <div class="col-4">
                         <button type="submit" class="btn btn-success form-control">Zaloguj</button>

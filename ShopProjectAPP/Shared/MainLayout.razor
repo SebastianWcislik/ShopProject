@@ -7,18 +7,24 @@
     </div>
 
     <BlazoredToasts Position="ToastPosition.TopRight"
-                    Timeout="4"
+                    Timeout="2"
                     ShowProgressBar="true" />
 
     <main>
-@*         <div>
-            Zalogowany jako, @Username
-        </div> *@
         <div class="top-row px-4">
             <a href="/cart" style="text-decoration: none">Koszyk</a>
             <a hidden href="/register" style="text-decoration: none">Zarządzaj</a>
-            <a href="/login" style="text-decoration: none">Zaloguj</a>
-            <a href="/register" style="text-decoration: none">Zarejestruj</a>
+            @if (Username == null || String.IsNullOrWhiteSpace(Username))
+            {
+                <a href="/login" style="text-decoration: none">Zaloguj</a>
+            }
+            else
+            {
+                <a href="/" @onclick="LogOut" style="text-decoration: none">Wyloguj</a>
+                <a style="text-decoration: none; color: forestgreen">
+                    Zalogowany jako, @Username
+                </a>
+            }
         </div>
 
         <article class="content px-4">
@@ -30,6 +36,8 @@
 @code {
     [Inject]
     public ILocalStorageService local { get; set; }
+    [Inject]
+    public IToastService toast { get; set; }
     public string Username { get; set; }
 
     protected override async void OnAfterRender(bool firstRender)
@@ -45,5 +53,12 @@
             Username = login;
             StateHasChanged();
         }
+    }
+
+    public async Task LogOut()
+    {
+        await local.RemoveItemAsync("Username");
+        await local.RemoveItemAsync("UserId");
+        toast.ShowSuccess("Udało się wylogować");
     }
 }

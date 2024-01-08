@@ -2,6 +2,7 @@
 using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.JSInterop;
 using ShopProjectAPP.Helpers;
 using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
@@ -24,6 +25,8 @@ namespace ShopProjectAPP.ViewModel
         public IToastService toastService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public IJSRuntime runtime { get; set; }
 
         public async void UserRegistration()
         {
@@ -68,7 +71,7 @@ namespace ShopProjectAPP.ViewModel
 
         public void NavigateToMainMenu()
         {
-            NavigationManager.NavigateTo("/");
+            runtime.InvokeVoidAsync("history.back");
         }
     }
 }

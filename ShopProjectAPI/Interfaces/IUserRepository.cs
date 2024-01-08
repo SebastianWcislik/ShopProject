@@ -5,7 +5,7 @@ namespace ShopProjectAPI.Interfaces
 {
     public interface IUserRepository
     {
-        bool Login(UserLoginModel userLogin);
+        UserLoginMessage Login(UserLoginModel userLogin);
         UserRegistrationMessage Register (UserRegisterModel userRegister);
         bool CheckUserById(int UserId);
     }

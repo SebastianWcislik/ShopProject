@@ -14,7 +14,7 @@ namespace ShopProjectAPI.Repository
             this.db = db;
         }
 
-        public bool Login(UserLoginModel userLogin)
+        public UserLoginMessage Login(UserLoginModel userLogin)
         {
             if (String.IsNullOrWhiteSpace(userLogin.Username)) throw new Exception("Nie wpisano nazwy użytkownika");
             if (String.IsNullOrWhiteSpace(userLogin.Password)) throw new Exception("Nie wpisano hasła");
@@ -28,7 +28,11 @@ namespace ShopProjectAPI.Repository
                 }
                 else
                 {
-                    return true;
+                    return new UserLoginMessage
+                    {
+                        Username = checkUser.Username,
+                        UserId = checkUser.Id
+                    };
                 }
             }
             else
