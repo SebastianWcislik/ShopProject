@@ -1,5 +1,4 @@
 ﻿using ShopProjectAPI.DB;
-using ShopProjectExternalModel.Game;
 using ShopProjectExternalModel.Order;
 
 namespace ShopProjectAPI.Mappers

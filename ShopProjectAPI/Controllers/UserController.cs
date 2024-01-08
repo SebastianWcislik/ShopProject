@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProjectAPI.Attributes;
 using ShopProjectAPI.Interfaces;
-using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
 namespace ShopProjectAPI.Controllers
