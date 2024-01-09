@@ -20,7 +20,7 @@ else
                     @Game.Price.ToString("C")&nbsp;
                 </b>
             </p>
-            @if (UserId != 0)
+            @if (UserId != 0 && !ShowSameGame)
             {
                 <div>
                     <button class="btn btn-success"

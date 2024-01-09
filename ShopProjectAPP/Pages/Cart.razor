@@ -9,16 +9,51 @@
 }
 else
 {
-    <table>
-        @foreach (var item in Cart)
-        {
-            <tr>
-                <td>
-                    <img src="@item.ImageURL" />
-
-                    @item.Name
-                </td>
-            </tr>
-        }
-    </table>
+    <h3 class="mb-5">Koszyk zakupowy</h3>
+    @if (Cart.Count() > 0)
+    {
+        <div class="row mb-5">
+            <div class="col-md-9">
+                @foreach (var item in Cart)
+                {
+                    <div class="row mb-4">
+                        <div class="col-md-2">
+                            <img src="@item.ImageURL" height="150" width="100" >
+                        </div>
+                        <div class="col-md-8">
+                            <h5>@item.Name</h5>
+                            <div class="mb-4">@item.Description</div>
+                            <span>
+                                Cena: <b>@item.Price</b>
+                                <select value="@item.Quantity" @onchange="(ChangeEventArgs e) => { item.Quantity = Convert.ToInt32(e.Value.ToString()); UpdateQuantity(); }">
+                                        @for (var i=1; i <=10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                </select>
+                            </span>
+                            <div style="margin-top: 2rem">
+                                <button @onclick="() => Delete(item.GameId)" class="btn btn-danger sm">
+                                    <i class="fa fa-trash">U  suń</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <h5>PODSUMOWANIE KOSZYKA</h5>
+                <div class="mt-2">
+                    <div><b>@TotalPrice</b></div>
+                    <a href="Checkout" class="btn btn-success">
+                        <span class="oi oi-credit-card"></span>&nbsp; Zapłać
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4>Twój koszyk jest pusty</h4>
+    }
 }

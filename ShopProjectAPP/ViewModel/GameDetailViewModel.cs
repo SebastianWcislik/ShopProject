@@ -14,6 +14,7 @@ namespace ShopProjectAPP.ViewModel
         public GameModel Game { get; set; }
         public HttpHelpers httpHelper { get; set; }
         public int UserId { get; set; } = 0;
+        public bool ShowSameGame { get; set; } = true;
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         [Inject]
@@ -41,6 +42,13 @@ namespace ShopProjectAPP.ViewModel
             if (result != null)
             {
                 Game = result;
+
+                var myCart = await local.GetItemAsync<List<CartModel>>("Cart" + userId);
+                if (myCart != null)
+                {
+                    ShowSameGame = myCart.Any(x => x.GameId == Game.Id);
+                }
+               
                 StateHasChanged();
             }
             else
@@ -53,10 +61,12 @@ namespace ShopProjectAPP.ViewModel
         {
             var userId = await local.GetItemAsync<int>("UserId");
             var myCart = await local.GetItemAsync<List<CartModel>>("Cart" + userId);
-            myCart.Add(new CartModel { GameId = Game.Id, Name = Game.Name, ImageURL = Game.ImageURL });
-            await local.RemoveItemAsync("Cart" + userId);
+            myCart.Add(new CartModel { GameId = Game.Id, Name = Game.Name, Description=Game.Description, Price = Game.Price, ImageURL = Game.ImageURL, Quantity = 1 });
+            await local.RemoveItemAsync("Cart" + userId); 
             await local.SetItemAsync("Cart" + userId, myCart);
             toast.ShowSuccess("Dodano do koszyka");
+            ShowSameGame = true;
+            StateHasChanged();
         }
 
         public void NavigateToMainMenu()
