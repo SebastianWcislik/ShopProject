@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopProjectAPI.Attributes;
 using ShopProjectAPI.Interfaces;
+using ShopProjectExternalModel.Cart;
 using ShopProjectExternalModel.Order;
 
 namespace ShopProjectAPI.Controllers
@@ -18,7 +19,7 @@ namespace ShopProjectAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddOrder([FromBody]List<AddOrderModel> order)
+        public IActionResult AddOrder([FromBody]List<CartModel> order)
         {
             var result = or.AddOrders(order);
             return Ok(result);

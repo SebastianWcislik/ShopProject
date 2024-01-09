@@ -2,6 +2,7 @@
 {
     public class CartModel
     {
+        public int UserId {  get; set; }
         public int GameId { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }

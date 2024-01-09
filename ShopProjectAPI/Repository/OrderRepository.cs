@@ -1,6 +1,7 @@
 ﻿using ShopProjectAPI.DB;
 using ShopProjectAPI.Interfaces;
 using ShopProjectAPI.Mappers;
+using ShopProjectExternalModel.Cart;
 using ShopProjectExternalModel.Order;
 using ShopProjectExternalModel.Responses;
 
@@ -21,7 +22,7 @@ namespace ShopProjectAPI.Repository
             this.om = om;
         }
 
-        public AddOrdersMessage AddOrders(List<AddOrderModel> orders)
+        public AddOrdersMessage AddOrders(List<CartModel> orders)
         {
             foreach (var order in orders)
             {
