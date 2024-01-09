@@ -54,5 +54,27 @@ namespace ShopProjectAPP.Helpers
             }
             return resultObejct;
         }
+
+        public async ValueTask<T> PutResponse<T>(string path, object content)
+        {
+            string json = JsonConvert.SerializeObject(content);
+            var jsonContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var result = await http.PutAsync(path, jsonContent);
+            T resultObejct = default;
+            try
+            {
+                if (result != null)
+                {
+                    var resultMessage = await result.Content.ReadAsStringAsync();
+                    resultObejct = JsonConvert.DeserializeObject<T>(resultMessage);
+                }
+            }
+            catch
+            {
+                return resultObejct;
+            }
+            return resultObejct;
+        }
     }
 }

@@ -39,9 +39,9 @@ namespace ShopProjectAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult ChangePassword([FromQuery]int UserId, [FromQuery]string pass)
+        public IActionResult ChangePassword([FromBody]UserUpdateModel userUpdate)
         {
-            var result = user.ChangePassword(UserId, pass);
+            var result = user.ChangePassword(userUpdate.UserId, userUpdate.Password);
             return Ok(result);
         }
 
