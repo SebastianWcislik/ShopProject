@@ -30,5 +30,12 @@ namespace ShopProjectAPI.Controllers
             var result = or.GetOrderGamesById(OrderId);
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult GetUserOrders([FromQuery]int UserId) 
+        {
+            var result = or.GetUserOrders(UserId);
+            return Ok(result);
+        }
     }
 }

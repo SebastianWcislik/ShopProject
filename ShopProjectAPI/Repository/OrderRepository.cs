@@ -71,5 +71,16 @@ namespace ShopProjectAPI.Repository
                 return new OrderGamesModel[] { };
             }
         }
+
+        public UserOrdersMessage[] GetUserOrders(int UserId)
+        {
+            var result = db.Orders.Where(x => x.UserId == UserId).Select(x => new UserOrdersMessage
+            {
+                Id = x.Id,
+                CreatedDate = x.CreatedDate
+            }).ToArray();
+            if (result.Length != 0) return result;
+            else return null;
+        }
     }
 }

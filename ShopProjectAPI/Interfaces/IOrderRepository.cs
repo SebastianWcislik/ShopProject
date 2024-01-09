@@ -7,5 +7,6 @@ namespace ShopProjectAPI.Interfaces
     {
         AddOrdersMessage AddOrders(List<AddOrderModel> orders);
         OrderGamesModel[] GetOrderGamesById(int OrderId);
+        UserOrdersMessage[] GetUserOrders(int UserId);
     }
 }
