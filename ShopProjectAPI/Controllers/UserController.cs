@@ -37,5 +37,19 @@ namespace ShopProjectAPI.Controllers
             var result = user.GetUserById(UserId);
             return Ok(result);
         }
+
+        [HttpPut]
+        public IActionResult ChangePassword([FromQuery]int UserId, [FromQuery]string pass)
+        {
+            var result = user.ChangePassword(UserId, pass);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteUser([FromQuery]int UserId)
+        {
+            var result = user.DeleteUser(UserId);
+            return Ok(result);
+        }
     }
 }

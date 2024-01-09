@@ -97,6 +97,29 @@ namespace ShopProjectAPI.Repository
             else return null;
         }
 
+        public bool ChangePassword(int UserId, string pass)
+        {
+            var result = db.Users.FirstOrDefault(x => x.Id == UserId);
+            if (result != null)
+            {
+                result.Password = pass;
+                db.SaveChanges();
+                return true;
+            }
+            else return false;
+        }
+
+        public bool DeleteUser(int UserId)
+        {
+            var result = db.Users.FirstOrDefault(x => x.Id == UserId);
+            if (result != null)
+            {
+                db.Users.Remove(result);
+                db.SaveChanges();
+                return true;
+            } else return false;
+        }
+
         public bool CheckUserById(int UserId)
         {
             if (db.Users.FirstOrDefault(x => x.Id == UserId) == null) return false;

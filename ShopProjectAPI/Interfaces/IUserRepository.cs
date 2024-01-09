@@ -9,5 +9,7 @@ namespace ShopProjectAPI.Interfaces
         UserRegistrationMessage Register (UserRegisterModel userRegister);
         bool CheckUserById(int UserId);
         UserLoginDataMessage GetUserById(int UserId);
+        bool ChangePassword(int UserId, string pass);
+        bool DeleteUser(int UserId);
     }
 }
