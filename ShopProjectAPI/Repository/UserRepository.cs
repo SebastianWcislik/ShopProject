@@ -84,6 +84,19 @@ namespace ShopProjectAPI.Repository
             }
         }
 
+        public UserLoginDataMessage GetUserById(int UserId)
+        {
+            var result = db.Users.Select(x => new UserLoginDataMessage
+            {
+                Id = x.Id,
+                Username = x.Username,
+                Email = x.Email
+            }).FirstOrDefault(x => x.Id == UserId);
+
+            if (result != null) return result;
+            else return null;
+        }
+
         public bool CheckUserById(int UserId)
         {
             if (db.Users.FirstOrDefault(x => x.Id == UserId) == null) return false;

@@ -30,5 +30,12 @@ namespace ShopProjectAPI.Controllers
             var result = user.Register(userRegister);
             return Ok(result);
         }
+
+        [HttpGet]
+        public IActionResult GetUserById([FromQuery]int UserId)
+        {
+            var result = user.GetUserById(UserId);
+            return Ok(result);
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace ShopProjectAPI.Interfaces
         UserLoginMessage Login(UserLoginModel userLogin);
         UserRegistrationMessage Register (UserRegisterModel userRegister);
         bool CheckUserById(int UserId);
+        UserLoginDataMessage GetUserById(int UserId);
     }
 }
