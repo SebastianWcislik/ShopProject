@@ -76,5 +76,24 @@ namespace ShopProjectAPP.Helpers
             }
             return resultObejct;
         }
+
+        public async ValueTask<T> DeleteResponse<T>(string path)
+        {
+            var result = await http.DeleteAsync(path);
+            T resultObejct = default;
+            try
+            {
+                if (result != null)
+                {
+                    var resultMessage = await result.Content.ReadAsStringAsync();
+                    resultObejct = JsonConvert.DeserializeObject<T>(resultMessage);
+                }
+            }
+            catch
+            {
+                return resultObejct;
+            }
+            return resultObejct;
+        }
     }
 }

@@ -24,8 +24,6 @@ namespace ShopProjectAPP.ViewModel
         [Inject]
         public IToastService toastService { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
-        [Inject]
         public IJSRuntime runtime { get; set; }
 
         public async void UserRegistration()

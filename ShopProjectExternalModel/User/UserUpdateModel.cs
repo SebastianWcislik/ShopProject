@@ -5,10 +5,10 @@ namespace ShopProjectExternalModel.User
     public class UserUpdateModel
     {
         public int UserId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Hasło jest wymagane")]
         public string Password { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Hasło jest wymagane")]
         [Compare("Password", ErrorMessage = "Hasła się nie zgadzają")]
-        public string ConfirmPassword { get; set; }
+        public string PasswordConfirm { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Blazored.Modal;
 using Blazored.Toast;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -13,6 +14,7 @@ builder.Services.AddScoped<GameViewModel>();
 builder.Services.AddScoped<NavMenuViewModel>();
 builder.Services.AddBlazoredToast();
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddBlazoredModal();
 
 url = builder.Configuration.GetValue<string>("HttpAddress");
 
