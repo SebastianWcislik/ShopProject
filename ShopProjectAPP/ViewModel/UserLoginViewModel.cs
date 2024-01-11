@@ -33,12 +33,20 @@ namespace ShopProjectAPP.ViewModel
         {
             if (editContext.Validate())
             {
-                var result = await httpHelpers.PostResponse<UserLoginMessage>(Program.url + "/User/Login", editContext.Model);
-                await local.SetItemAsync("Username", result.Username);
-                await local.SetItemAsync("UserId", result.UserId);
-                await local.SetItemAsync("Cart" + result.UserId, new List<CartModel> { });
-                toast.ShowSuccess("Udało się zalogować");
-                NavigationManager.NavigateTo("/");
+                var result = await httpHelpers.PostResponse<UserLoginMessage>(Program.userUrl + "/User/Login", editContext.Model);
+                if (result != null)
+                {
+                    await local.SetItemAsync("Username", result.Username);
+                    await local.SetItemAsync("UserId", result.UserId);
+                    var myCart = await local.ContainKeyAsync("Cart" + result.UserId);
+                    if (myCart == false) await local.SetItemAsync("Cart" + result.UserId, new List<CartModel> { });
+                    toast.ShowSuccess("Udało się zalogować");
+                    NavigationManager.NavigateTo("/");
+                }
+                else
+                {
+                    toast.ShowError("Podano niepoprawne dane.");
+                }
             }
         }
 

@@ -30,7 +30,7 @@ namespace ShopProjectAPP.ViewModel
         {
             if (editContext.Validate())
             {
-                var result = await httpHelpers.PostResponse<UserRegistrationMessage>(Program.url + "/User/Register", editContext.Model);
+                var result = await httpHelpers.PostResponse<UserRegistrationMessage>(Program.userActionUrl + "/User/Register", editContext.Model);
 
                 if (result.Errors != null)
                 {

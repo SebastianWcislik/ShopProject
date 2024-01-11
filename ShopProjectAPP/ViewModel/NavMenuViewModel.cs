@@ -17,7 +17,7 @@ namespace ShopProjectAPP.ViewModel
 
         public async Task<GameCategoryModel[]> GetGameCategories()
         {
-            var result = await httpHelper.GetResponse<GameCategoryModel[]>(Program.url + "/Games/GetGameCategories");
+            var result = await httpHelper.GetResponse<GameCategoryModel[]>(Program.gamesUrl + "/Games/GetGameCategories");
             return result;
         }
 

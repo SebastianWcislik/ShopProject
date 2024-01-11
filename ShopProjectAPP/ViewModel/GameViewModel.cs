@@ -24,13 +24,13 @@ namespace ShopProjectAPP.ViewModel
 
         public async Task<GameModel[]> GetGames()
         {
-            var result = await httpHelper.GetResponse<GameModel[]>(Program.url + "/Games/GetGames");
+            var result = await httpHelper.GetResponse<GameModel[]>(Program.gamesUrl + "/Games/GetGames");
             return result;
         }
 
         public async Task<GameModel[]> GetGamesCategory()
         {
-            var result = await httpHelper.GetResponse<GameModel[]>(Program.url + "/Games/GetGamesByCategory?CategoryId=" + CategoryId);
+            var result = await httpHelper.GetResponse<GameModel[]>(Program.gamesUrl + "/Games/GetGamesByCategory?CategoryId=" + CategoryId);
             return result;
         }
 

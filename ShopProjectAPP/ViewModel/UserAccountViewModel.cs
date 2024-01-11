@@ -37,7 +37,7 @@ namespace ShopProjectAPP.ViewModel
         protected override async void OnInitialized()
         {
             var userId = await local.GetItemAsync<int>("UserId");
-            var result = await httpHelpers.GetResponse<UserLoginDataMessage>(Program.url + "/User/GetUserById?UserId=" + userId);
+            var result = await httpHelpers.GetResponse<UserLoginDataMessage>(Program.userUrl + "/User/GetUserById?UserId=" + userId);
             userAccount = result;
             userUpdate = new UserUpdateModel { UserId = userId };
             editContext = new EditContext(userUpdate);
@@ -57,7 +57,7 @@ namespace ShopProjectAPP.ViewModel
         {
             if (editContext.Validate())
             {
-                var result = await httpHelpers.PutResponse<bool>(Program.url + "/User/ChangePassword", editContext.Model);
+                var result = await httpHelpers.PutResponse<bool>(Program.userActionUrl + "/User/ChangePassword", editContext.Model);
                 if (result)
                 {
                     toastService.ShowSuccess("Zmiana hasła została przeprowadzona pomyślnie.");
@@ -80,7 +80,7 @@ namespace ShopProjectAPP.ViewModel
             if (result.Confirmed)
             {
                 var userId = await local.GetItemAsync<int>("UserId");
-                var deleteReturn = await httpHelpers.DeleteResponse<bool>(Program.url + "/User/DeleteUser?UserId=" + userId);
+                var deleteReturn = await httpHelpers.DeleteResponse<bool>(Program.userActionUrl + "/User/DeleteUser?UserId=" + userId);
                 if (deleteReturn)
                 {
                     await local.RemoveItemAsync("Cart" + userId);

@@ -1,9 +1,9 @@
-﻿using ShopProjectAPI.DB;
-using ShopProjectAPI.Interfaces;
+﻿using ShopProjectInfrastructure.DB;
+using ShopProjectInfrastructure.Interfaces;
 using ShopProjectExternalModel.Responses;
 using ShopProjectExternalModel.User;
 
-namespace ShopProjectAPI.Repository
+namespace ShopProjectInfrastructure.Repository
 {
     public class UserRepository : IUserRepository
     {
@@ -16,8 +16,8 @@ namespace ShopProjectAPI.Repository
 
         public UserLoginMessage Login(UserLoginModel userLogin)
         {
-            if (String.IsNullOrWhiteSpace(userLogin.Username)) throw new Exception("Nie wpisano nazwy użytkownika");
-            if (String.IsNullOrWhiteSpace(userLogin.Password)) throw new Exception("Nie wpisano hasła");
+            if (String.IsNullOrWhiteSpace(userLogin.Username)) return null;
+            if (String.IsNullOrWhiteSpace(userLogin.Password)) return null;
 
             var checkUser = db.Users.FirstOrDefault(x => x.Username == userLogin.Username);
             if (checkUser != null)

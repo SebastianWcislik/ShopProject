@@ -56,7 +56,6 @@
 
     public async Task LogOut()
     {
-        await local.RemoveItemAsync("Cart" + await local.GetItemAsync<int>("UserId"));
         await local.RemoveItemAsync("Username");
         await local.RemoveItemAsync("UserId");
         toast.ShowSuccess("Udało się wylogować");

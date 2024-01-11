@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopProjectAPI.Attributes;
-using ShopProjectAPI.Interfaces;
-using ShopProjectExternalModel.Cart;
+using ShopProjectInfrastructure.Attributes;
+using ShopProjectInfrastructure.Interfaces;
 
-namespace ShopProjectAPI.Controllers
+namespace ShopProjectOrderAPI.Controllers
 {
     [ApiController]
     [Bearer]
@@ -17,22 +16,15 @@ namespace ShopProjectAPI.Controllers
             this.or = or;
         }
 
-        [HttpPost]
-        public IActionResult AddOrder([FromBody]List<CartModel> order)
-        {
-            var result = or.AddOrders(order);
-            return Ok(result);
-        }
-
         [HttpGet]
-        public IActionResult GetOrderGames([FromQuery]int OrderId)
+        public IActionResult GetOrderGames([FromQuery] int OrderId)
         {
             var result = or.GetOrderGamesById(OrderId);
             return Ok(result);
         }
 
         [HttpGet]
-        public IActionResult GetUserOrders([FromQuery]int UserId) 
+        public IActionResult GetUserOrders([FromQuery] int UserId)
         {
             var result = or.GetUserOrders(UserId);
             return Ok(result);

@@ -29,7 +29,7 @@ namespace ShopProjectAPP.ViewModel
 
         public async Task<GameModel> GetGame()
         {
-            var result = await httpHelper.GetResponse<GameModel>(Program.url + "/Games/GetGame?Id=" + Id);
+            var result = await httpHelper.GetResponse<GameModel>(Program.gamesUrl + "/Games/GetGame?Id=" + Id);
             return result;
         }
 
