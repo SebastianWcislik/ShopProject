@@ -1,5 +1,4 @@
-﻿using Blazored.LocalStorage;
-using Blazored.Toast.Services;
+﻿using Blazored.Toast.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
